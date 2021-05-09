@@ -26,7 +26,8 @@ q = value + (advantages - advantages.mean(1, True))
         that would be taken under the current policy. And then compute the expected state-action values using the 
         secondary "target" network. The updates of the second network are soft in the sense that the weights are 
         updated by taking a weighted average of the two networks, the averaging weight of the current network is the 
-        hyperparameter 'tau' and '1 - tau' for the target network. The soft-updates are realized with 'tau' set to 1e-3.  
+        hyperparameter 'tau' and '1 - tau' for the target network. The soft-updates are realized with 'tau' set to 1e-3.
+        And the update is applied every 4 steps.
   
 ```python
 next_actions = self.qnetwork_local(next_states).max(dim=1, keepdim=True)[1]
@@ -40,7 +41,13 @@ y = (
 
 For the Stochastic Gradient Descent, a mean-squared error loss is used with the 'Adam' optimizer, 
 the learning rate is 5e-4 and the other parameters of the optimizer are kept to the default values. 
-The batch size is 64.  
+The batch size is 64. 
+
+Other hyperparameters include:
+- The replay buffer side is 10,000.
+- The discount factor gamma is 0.99.
+- The epsilon starts at 1 and decays after every episode with a factor 0.99 until the minimal value of 0.01 is reached.
+- The maximum number of steps per episode is 1000.
 
 ## Model Architecture
 
