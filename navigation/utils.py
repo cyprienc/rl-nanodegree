@@ -68,7 +68,7 @@ def run(
             print(f"\rEpisode {i_episode}\tAverage Score: {mean_score_window:.2f}")
         if train_mode and mean_score_window >= env_solve_criteria:
             print(
-                f"\nEnvironment solved in {i_episode - 100:d} episodes!\tAverage Score: {mean_score_window:.2f}"
+                f"\nEnvironment solved in {i_episode:d} episodes!\tAverage Score: {mean_score_window:.2f}"
             )
             torch.save(agent.qnetwork_local.state_dict(), "model.pth")
             break

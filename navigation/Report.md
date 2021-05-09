@@ -66,7 +66,7 @@ The outputs of the last 2 block are summed to obtain the action-state values.
 
 ## Results
 
-The environment is solved after ~350 episodes:
+The environment is solved after ~450 episodes:
 
 ![results](https://user-images.githubusercontent.com/5805228/117455292-f51bb900-af3e-11eb-9fcc-845c9225973f.png)
 

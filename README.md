@@ -13,5 +13,5 @@ and exercises answers for the Deep Reinforcement Learning Nanodegree Program.
   [leaderboard](https://github.com/openai/gym/wiki/Leaderboard#lunarlander-v2)).
   
 * `navigation/` is my submission for the Banana Unity ML environment (modified version by Udacity). 
-The agent solves the game in ~350 episodes. 
+The agent solves the game in ~450 episodes. 
   
