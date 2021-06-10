@@ -1,5 +1,7 @@
 FROM nvidia/cuda:9.2-cudnn7-runtime-ubuntu18.04
 
+ENV PYTHONUNBUFFERED True
+
 SHELL ["/bin/bash", "--login", "-c"]
 
 # Adapted from: https://github.com/conda/conda-docker/blob/master/miniconda3/debian/Dockerfile
@@ -20,7 +22,8 @@ ENV PATH /opt/conda/bin:$PATH
 
 WORKDIR /usr/src/app
 
-RUN conda create --name drlnd python=3.6 notebook jedi=0.17.2 -y
+RUN conda create --name drlnd python=3.6 notebook jedi=0.17.2 -y \
+    && conda install -n drlnd -y pytorch=0.4.1 cuda92 -c pytorch
 SHELL ["conda", "run", "--no-capture-output", "-n", "drlnd", "/bin/bash", "-c"]
 
 RUN git clone https://github.com/udacity/deep-reinforcement-learning.git \
@@ -33,6 +36,8 @@ RUN wget https://s3-us-west-1.amazonaws.com/udacity-drlnd/P2/Reacher/Reacher_Lin
     && rm Reacher_Linux_NoVis.zip \
     && apt-get -y remove wget unzip git
 
-COPY Continuous_Control.ipynb ./
+COPY Continuous_Control.ipynb *.py *.pth ./
 
 CMD ["conda", "run", "--no-capture-output", "-n", "drlnd", "jupyter", "notebook", "--port=8888", "--no-browser", "--ip=0.0.0.0", "--allow-root"]
+# Use this line instead if you want to run the calibration directly and not from within a notebook
+# CMD ["conda", "run", "--no-capture-output", "-n", "drlnd", "python", "run.py"]
