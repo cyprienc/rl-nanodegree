@@ -1,0 +1,9 @@
+gym == 0.18.0
+jedi == 0.17
+jupyterlab
+numpy
+pandas
+pettingzoo[mpe] == 1.9.0
+stable-baselines3
+supersuit
+torch
